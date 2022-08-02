@@ -75,3 +75,45 @@ function initCheck() {
   checkEmail(email);
   checkPasswordMatch(password, password2);
 }
+
+
+const locale = "en";
+
+const translations = {
+  'en': {
+    'title': 'Registration',
+    'label-name': 'Username',
+    'label-email': 'Email',
+    'label-password': 'Password',
+    'label-password2': 'Confirm password', 
+    'submit': 'Submit',
+  },
+  "ru": {
+    "title": "Регистрация",
+    'label-name': 'Имя пользователя',
+    'label-email': 'Эл. почта',
+    'label-password': 'Пароль',
+    'label-password2': 'Подтвердите пароль',
+    'submit': 'Зарегистрироваться',
+  }
+};
+
+function translate(element, locale) {
+  const key = element.getAttribute("data-i18n");
+  element.innerText = translations[locale][key];
+}
+
+const checkbox = document.querySelector('input[type=checkbox]');
+const title = document.querySelector('[data-i18n=title]')
+
+checkbox.addEventListener('change', (e) => {
+  let locale = "en";
+  if (e.currentTarget.checked) {
+    locale = "en";
+  } else {
+    locale = "ru"
+  }
+
+  const items = document.querySelectorAll('[data-i18n]');
+  items.forEach(item => translate(item, locale));
+})
